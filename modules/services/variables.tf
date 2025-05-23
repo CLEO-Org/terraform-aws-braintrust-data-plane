@@ -259,3 +259,13 @@ variable "cloudfront_logging_config" {
   default = null
 }
 
+variable "route53_zone_id" {
+  description = "The ID of the Route53 hosted zone for DNS validation"
+  type        = string
+  default     = null
+  validation {
+    condition     = var.custom_domain != null ? var.route53_zone_id != null : true
+    error_message = "Route53 zone ID is required when using a custom domain."
+  }
+}
+

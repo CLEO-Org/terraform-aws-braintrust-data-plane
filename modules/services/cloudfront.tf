@@ -11,6 +11,7 @@ resource "aws_cloudfront_distribution" "dataplane" {
   # Deploy only in North America and Europe. Reduces costs and deployment time.
   price_class = "PriceClass_100"
   aliases     = var.custom_domain != null ? [var.custom_domain] : null
+  web_acl_id  = var.brainstore_enabled ? aws_wafv2_web_acl.brainstore[0].arn : null
 
   # Add logging configuration if provided
   dynamic "logging_config" {
