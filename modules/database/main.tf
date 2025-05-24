@@ -124,6 +124,7 @@ resource "aws_db_parameter_group" "main" {
   parameter {
     name  = "log_checkpoints"
     value = "1"  # Log checkpoints
+    apply_method = "pending-reboot"
   }
 
   parameter {
