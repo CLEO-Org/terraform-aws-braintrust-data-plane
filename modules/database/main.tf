@@ -44,6 +44,9 @@ resource "aws_db_instance" "main" {
 
   kms_key_id = var.kms_key_arn
 
+  # Enable export of PostgreSQL and upgrade logs to CloudWatch
+  enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
+
   tags = local.common_tags
 
   lifecycle {
@@ -80,6 +83,57 @@ resource "aws_db_parameter_group" "main" {
   parameter {
     name  = "statement_timeout"
     value = "3600000"
+  }
+
+  # Logging parameters
+  parameter {
+    name  = "log_min_duration_statement"
+    value = "1000"  # Log statements that take more than 1 second
+  }
+
+  parameter {
+    name  = "log_statement"
+    value = "ddl"  # Log all DDL statements
+  }
+
+  parameter {
+    name  = "log_connections"
+    value = "1"  # Log all connection attempts
+  }
+
+  parameter {
+    name  = "log_disconnections"
+    value = "1"  # Log all disconnections
+  }
+
+  parameter {
+    name  = "log_lock_waits"
+    value = "1"  # Log lock waits
+  }
+
+  parameter {
+    name  = "log_temp_files"
+    value = "0"  # Log all temporary file creations
+  }
+
+  parameter {
+    name  = "log_autovacuum_min_duration"
+    value = "0"  # Log all autovacuum operations
+  }
+
+  parameter {
+    name  = "log_checkpoints"
+    value = "1"  # Log checkpoints
+  }
+
+  parameter {
+    name  = "log_rotation_age"
+    value = "1440"  # Rotate logs every 24 hours
+  }
+
+  parameter {
+    name  = "log_rotation_size"
+    value = "102400"  # 100MB in kilobytes
   }
 
   lifecycle {
