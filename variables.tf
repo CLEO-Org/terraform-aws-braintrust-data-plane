@@ -114,6 +114,29 @@ variable "quarantine_public_subnet_1_az" {
   description = "Availability zone for the public subnet. Leave blank to choose the first available zone"
 }
 
+variable "public_subnet_2_cidr" {
+  description = "CIDR block for the second public subnet"
+  type        = string
+  default     = "10.175.2.0/24"
+}
+
+variable "public_subnet_2_az" {
+  description = "Availability zone for the second public subnet"
+  type        = string
+  default     = "us-east-1b"
+}
+
+variable "quarantine_public_subnet_2_cidr" {
+  description = "CIDR block for the second public subnet in the quarantine VPC"
+  type        = string
+  default     = "10.175.10.0/24"
+}
+
+variable "quarantine_public_subnet_2_az" {
+  description = "Availability zone for the second public subnet in the quarantine VPC"
+  type        = string
+  default     = "us-east-1b"
+}
 
 ## Database
 variable "postgres_instance_type" {
@@ -357,4 +380,14 @@ variable "service_extra_env_vars" {
     MigrateDatabaseFunction  = {}
     QuarantineWarmupFunction = {}
   }
+}
+
+variable "cloudfront_logging_config" {
+  description = "CloudFront logging configuration. Should be an object with bucket, include_cookies, and prefix. Set to null to disable logging."
+  type = object({
+    bucket          = string
+    include_cookies = bool
+    prefix          = string
+  })
+  default = null
 }

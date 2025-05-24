@@ -42,3 +42,13 @@ output "default_security_group_id" {
   description = "The ID of the default security group that is automatically created for the VPC"
   value       = aws_vpc.vpc.default_security_group_id
 }
+
+output "public_subnet_2_id" {
+  description = "ID of the second public subnet"
+  value       = aws_subnet.public_subnet_2.id
+}
+
+output "nat_gateway_2_id" {
+  description = "ID of the second NAT gateway"
+  value       = aws_nat_gateway.nat_gateway_2.id
+}

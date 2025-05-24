@@ -162,9 +162,19 @@ variable "custom_domain" {
 }
 
 variable "custom_certificate_arn" {
-  description = "ARN of the ACM certificate for the custom domain"
+  description = "The ARN of an existing ACM certificate to use for the CloudFront distribution. Must be in us-east-1 region for CloudFront. If not provided and custom_domain is set, the module will create a new certificate. If not provided and no custom_domain is set, CloudFront will use its default certificate."
   type        = string
   default     = null
+}
+
+variable "route53_zone_id" {
+  description = "The ID of the Route53 hosted zone for DNS validation. Required when using a custom domain and not providing a custom_certificate_arn."
+  type        = string
+  default     = null
+  validation {
+    condition     = (var.custom_domain != null && var.custom_certificate_arn == null) ? var.route53_zone_id != null : true
+    error_message = "Route53 zone ID is required when using a custom domain and not providing a custom certificate ARN."
+  }
 }
 
 variable "kms_key_arn" {
@@ -250,22 +260,12 @@ variable "extra_env_vars" {
 }
 
 variable "cloudfront_logging_config" {
-  description = "Configuration for CloudFront logging"
+  description = "Configuration for CloudFront access logging. If provided, CloudFront will log access to the specified S3 bucket."
   type = object({
     bucket          = string
     include_cookies = optional(bool, false)
     prefix          = optional(string)
   })
   default = null
-}
-
-variable "route53_zone_id" {
-  description = "The ID of the Route53 hosted zone for DNS validation"
-  type        = string
-  default     = null
-  validation {
-    condition     = var.custom_domain != null ? var.route53_zone_id != null : true
-    error_message = "Route53 zone ID is required when using a custom domain."
-  }
 }
 

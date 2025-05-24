@@ -57,8 +57,3 @@ output "brainstore_waf_web_acl_arn" {
   description = "The ARN of the WAF Web ACL for Brainstore"
   value       = var.brainstore_enabled ? aws_wafv2_web_acl.brainstore[0].arn : null
 }
-
-output "certificate_arn" {
-  description = "The ARN of the ACM certificate for the custom domain"
-  value       = var.custom_domain != null ? aws_acm_certificate.braintrust[0].arn : null
-}

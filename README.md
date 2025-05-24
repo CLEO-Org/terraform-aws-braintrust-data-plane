@@ -6,6 +6,48 @@ This module is used to create the VPC, Databases, Lambdas, and associated resour
 
 To use this module, **copy the [`examples/braintrust-data-plane`](examples/braintrust-data-plane) directory to a new Terraform directory in your own repository**. Follow the instructions in the [`README.md`](examples/braintrust-data-plane/README.md) file in that directory to configure the module for your environment.
 
+### Custom Domain and SSL Certificate
+
+To use a custom domain with your Braintrust data plane, you have two options:
+
+1. Let the module create and manage the certificate (recommended for most users):
+```hcl
+module "braintrust-data-plane" {
+  source = "..."
+  custom_domain = "braintrust.example.com"
+  route53_zone_id = "Z1234567890ABC"  # Required for DNS validation
+  # ... other variables ...
+}
+```
+
+2. Provide your own ACM certificate:
+```hcl
+module "braintrust-data-plane" {
+  source = "..."
+  custom_domain = "braintrust.example.com"
+  custom_certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/example"
+  # ... other variables ...
+}
+```
+
+Note: If you provide your own certificate, it must be in the us-east-1 region (required for CloudFront).
+
+### CloudFront Logging
+
+To enable CloudFront access logging, provide a logging configuration:
+
+```hcl
+module "braintrust-data-plane" {
+  source = "..."
+  cloudfront_logging_config = {
+    bucket          = "my-logs-bucket.s3.amazonaws.com"
+    include_cookies = false
+    prefix          = "cloudfront-logs"
+  }
+  # ... other variables ...
+}
+```
+
 If you're using a brand new AWS account for your Braintrust data plane you will need to run ./scripts/create-service-linked-roles.sh once to ensure IAM service-linked roles are created.
 
 ## Useful scripts
