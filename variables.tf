@@ -383,11 +383,11 @@ variable "service_extra_env_vars" {
 }
 
 variable "cloudfront_logging_config" {
-  description = "CloudFront logging configuration. Should be an object with bucket, include_cookies, and prefix. Set to null to disable logging."
+  description = "Configuration for CloudFront access logging. If provided, CloudFront will log access to the specified S3 bucket."
   type = object({
     bucket          = string
-    include_cookies = bool
-    prefix          = string
+    include_cookies = optional(bool, false)
+    prefix          = optional(string)
   })
   default = null
 }

@@ -57,3 +57,13 @@ output "brainstore_waf_web_acl_arn" {
   description = "The ARN of the WAF Web ACL for Brainstore"
   value       = var.brainstore_enabled ? aws_wafv2_web_acl.brainstore[0].arn : null
 }
+
+output "cloudfront_distribution_domain_name" {
+  description = "The domain name of the CloudFront distribution."
+  value       = aws_cloudfront_distribution.dataplane.domain_name
+}
+
+output "cloudfront_distribution_hosted_zone_id" {
+  description = "The hosted zone ID of the CloudFront distribution."
+  value       = aws_cloudfront_distribution.dataplane.hosted_zone_id
+}

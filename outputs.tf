@@ -77,3 +77,13 @@ output "clickhouse_host" {
   value       = try(module.clickhouse[0].clickhouse_instance_private_ip, null)
   description = "Host of the Clickhouse instance"
 }
+
+output "cloudfront_distribution_domain_name" {
+  value       = module.services.cloudfront_distribution_domain_name
+  description = "The domain name of the CloudFront distribution."
+}
+
+output "cloudfront_distribution_hosted_zone_id" {
+  value       = module.services.cloudfront_distribution_hosted_zone_id
+  description = "The hosted zone ID of the CloudFront distribution."
+}

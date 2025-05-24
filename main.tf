@@ -126,6 +126,7 @@ module "services" {
   custom_certificate_arn              = var.custom_certificate_arn
   service_additional_policy_arns      = var.service_additional_policy_arns
   extra_env_vars                      = var.service_extra_env_vars
+  cloudfront_logging_config           = var.cloudfront_logging_config
 
   # Networking
   service_security_group_ids = [module.main_vpc.default_security_group_id]
