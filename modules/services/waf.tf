@@ -5,7 +5,7 @@ resource "aws_wafv2_web_acl" "brainstore" {
   description = "Brainstore Web ACL"
 
   default_action {
-    allow {}
+    deny {}
   }
 
   rule {

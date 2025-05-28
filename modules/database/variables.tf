@@ -19,7 +19,7 @@ variable "postgres_storage_size" {
 variable "postgres_max_storage_size" {
   description = "Maximum storage size (in GB) to allow the RDS instance to auto-scale to."
   type        = number
-  default     = 1000
+  default     = 2000
 }
 
 variable "postgres_storage_type" {
