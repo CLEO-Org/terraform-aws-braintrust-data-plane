@@ -48,4 +48,8 @@ resource "aws_wafv2_ip_set" "allowlist" {
   provider = aws.us-east-1
 
   tags = local.common_tags
+
+  lifecycle {
+    ignore_changes = [addresses]
+  }
 } 
