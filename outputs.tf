@@ -87,3 +87,23 @@ output "cloudfront_distribution_hosted_zone_id" {
   value       = module.services.cloudfront_distribution_hosted_zone_id
   description = "The hosted zone ID of the CloudFront distribution."
 }
+
+output "postgres_database_username" {
+  value       = module.database.postgres_database_username
+  description = "Username for the Postgres database"
+}
+
+output "postgres_database_password" {
+  value       = module.database.postgres_database_password
+  description = "Password for the Postgres database"
+}
+
+output "postgres_database_address" {
+  value       = module.database.postgres_database_address
+  description = "Address of the Postgres database"
+}
+
+output "postgres_database_port" {
+  value       = module.database.postgres_database_port
+  description = "Port of the Postgres database"
+}

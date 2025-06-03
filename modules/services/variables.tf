@@ -23,6 +23,7 @@ variable "service_additional_policy_arns" {
   description = "Additional policy ARNs to attach to the lambda functions that are the main braintrust service"
   default     = []
 }
+
 variable "postgres_username" {
   type        = string
   description = "The username of the postgres database"
@@ -137,6 +138,7 @@ variable "outbound_rate_limit_max_requests" {
   description = "The maximum number of requests per user allowed in the time frame specified by OutboundRateLimitMaxRequests. Setting to 0 will disable rate limits"
   default     = 0
 }
+
 variable "outbound_rate_limit_window_minutes" {
   type        = number
   description = "The time frame in minutes over which rate per-user rate limits are accumulated"
@@ -260,12 +262,73 @@ variable "extra_env_vars" {
 }
 
 variable "cloudfront_logging_config" {
-  description = "Configuration for CloudFront access logging. If provided, CloudFront will log access to the specified S3 bucket."
+  description = "Configuration for CloudFront logging"
   type = object({
     bucket          = string
-    include_cookies = optional(bool, false)
-    prefix          = optional(string)
+    prefix          = string
+    include_cookies = bool
   })
   default = null
+}
+
+variable "main_vpc_private_subnet_1_id" {
+  type        = string
+  description = "ID of the first private subnet in the main VPC"
+}
+
+variable "main_vpc_private_subnet_2_id" {
+  type        = string
+  description = "ID of the second private subnet in the main VPC"
+}
+
+variable "main_vpc_private_subnet_3_id" {
+  type        = string
+  description = "ID of the third private subnet in the main VPC"
+}
+
+variable "vpc_id" {
+  description = "The ID of the VPC where the Lambda function will be deployed"
+  type        = string
+}
+
+variable "clickhouse_port" {
+  description = "Port for ClickHouse connection"
+  type        = string
+}
+
+variable "clickhouse_user" {
+  description = "Username for ClickHouse connection"
+  type        = string
+}
+
+variable "clickhouse_password" {
+  description = "Password for ClickHouse connection"
+  type        = string
+  sensitive   = true
+}
+
+variable "clickhouse_db" {
+  description = "Database name for ClickHouse connection"
+  type        = string
+}
+
+variable "object_id" {
+  description = "Object ID for log retention logic"
+  type        = string
+}
+
+variable "older_than_days" {
+  description = "Number of days to determine log retention cutoff"
+  type        = number
+}
+
+variable "target_records" {
+  description = "Target number of records for log retention logic"
+  type        = number
+}
+
+variable "iterations" {
+  description = "Number of iterations for log retention logic"
+  type        = number
 }
 
