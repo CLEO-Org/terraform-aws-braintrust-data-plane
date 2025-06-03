@@ -14,8 +14,6 @@ locals {
   postgres_url           = "postgres://${var.postgres_username}:${var.postgres_password}@${var.postgres_host}:${var.postgres_port}/postgres"
   brainstore_url         = var.brainstore_enabled ? "http://${var.brainstore_hostname}:${var.brainstore_port}" : ""
   brainstore_s3_bucket   = var.brainstore_enabled ? var.brainstore_s3_bucket_name : ""
-  clickhouse_pg_url      = var.clickhouse_host != null ? "postgres://default:${var.clickhouse_secret}@${var.clickhouse_host}:9005/default" : ""
-  clickhouse_connect_url = var.clickhouse_host != null ? "http://default:${var.clickhouse_secret}@${var.clickhouse_host}:8123/default" : ""
   common_tags = {
     BraintrustDeploymentName = var.deployment_name
   }

@@ -28,8 +28,6 @@ resource "aws_lambda_function" "catchup_etl" {
       BRAINSTORE_BACKFILL_DISABLE_HISTORICAL     = var.brainstore_backfill_disable_historical
       BRAINSTORE_BACKFILL_DISABLE_NONHISTORICAL  = var.brainstore_backfill_disable_nonhistorical
       CLICKHOUSE_ETL_BATCH_SIZE                  = var.brainstore_etl_batch_size
-      CLICKHOUSE_PG_URL                          = local.clickhouse_pg_url
-      CLICKHOUSE_CONNECT_URL                     = local.clickhouse_connect_url
     }, var.extra_env_vars.CatchupETL)
   }
 

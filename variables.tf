@@ -250,31 +250,6 @@ variable "lambda_version_tag_override" {
   default     = null
 }
 
-## Clickhouse
-variable "enable_clickhouse" {
-  type        = bool
-  description = "Enable Clickhouse for faster analytics"
-  default     = false
-}
-
-variable "use_external_clickhouse_address" {
-  type        = string
-  description = "Do not change this unless instructed by Braintrust. If set, the domain name or IP of the external Clickhouse instance will be used and no internal instance will be created."
-  default     = null
-}
-
-variable "clickhouse_metadata_storage_size" {
-  type        = number
-  description = "The size of the EBS volume to use for Clickhouse metadata"
-  default     = 100
-}
-
-variable "clickhouse_instance_type" {
-  type        = string
-  description = "The instance type to use for the Clickhouse instance"
-  default     = "c5.2xlarge"
-}
-
 ## Brainstore
 variable "enable_brainstore" {
   type        = bool
@@ -390,4 +365,29 @@ variable "cloudfront_logging_config" {
     prefix          = optional(string)
   })
   default = null
+}
+
+# Remove Clickhouse-related variables
+variable "enable_clickhouse" {
+  description = "Enable Clickhouse for log retention"
+  type        = bool
+  default     = false
+}
+
+variable "use_external_clickhouse_address" {
+  description = "Use external Clickhouse address"
+  type        = bool
+  default     = false
+}
+
+variable "clickhouse_metadata_storage_size" {
+  description = "Storage size for Clickhouse metadata"
+  type        = number
+  default     = 0
+}
+
+variable "clickhouse_instance_type" {
+  description = "Instance type for Clickhouse"
+  type        = string
+  default     = null
 }

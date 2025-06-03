@@ -70,8 +70,7 @@ resource "aws_lambda_function" "api_handler" {
       BRAINSTORE_BACKFILL_DISABLE_HISTORICAL     = var.brainstore_backfill_disable_historical
       BRAINSTORE_BACKFILL_DISABLE_NONHISTORICAL  = var.brainstore_backfill_disable_nonhistorical
 
-      CLICKHOUSE_PG_URL      = local.clickhouse_pg_url
-      CLICKHOUSE_CONNECT_URL = local.clickhouse_connect_url
+      # Removed CLICKHOUSE_PG_URL and CLICKHOUSE_CONNECT_URL as Clickhouse is no longer used
     }, var.extra_env_vars.APIHandler)
   }
 

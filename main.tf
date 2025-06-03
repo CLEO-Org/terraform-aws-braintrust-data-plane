@@ -104,14 +104,6 @@ module "services" {
 
   clickhouse_host   = local.clickhouse_address
   clickhouse_secret = var.enable_clickhouse ? module.clickhouse[0].clickhouse_secret : null
-  clickhouse_port     = ""
-  clickhouse_user     = ""
-  clickhouse_password = ""
-  clickhouse_db       = ""
-  object_id           = ""
-  older_than_days     = 0
-  target_records      = 0
-  iterations          = 0
 
   brainstore_enabled                         = var.enable_brainstore
   brainstore_default                         = var.brainstore_default

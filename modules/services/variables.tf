@@ -197,6 +197,55 @@ variable "clickhouse_secret" {
   default     = null
 }
 
+variable "clickhouse_port" {
+  description = "The port of the clickhouse instance"
+  type        = number
+  default     = null
+}
+
+variable "clickhouse_user" {
+  description = "The username for clickhouse"
+  type        = string
+  default     = null
+}
+
+variable "clickhouse_password" {
+  description = "The password for clickhouse"
+  type        = string
+  default     = null
+  sensitive   = true
+}
+
+variable "clickhouse_db" {
+  description = "The database name for clickhouse"
+  type        = string
+  default     = null
+}
+
+variable "object_id" {
+  description = "The object ID for log retention"
+  type        = string
+  default     = null
+}
+
+variable "older_than_days" {
+  description = "The number of days to retain logs"
+  type        = number
+  default     = 0
+}
+
+variable "target_records" {
+  description = "The target number of records to process"
+  type        = number
+  default     = 0
+}
+
+variable "iterations" {
+  description = "The number of iterations to run"
+  type        = number
+  default     = 0
+}
+
 variable "brainstore_enable_historical_full_backfill" {
   type        = bool
   description = "Enable historical full backfill for Brainstore"
@@ -289,46 +338,5 @@ variable "main_vpc_private_subnet_3_id" {
 variable "vpc_id" {
   description = "The ID of the VPC where the Lambda function will be deployed"
   type        = string
-}
-
-variable "clickhouse_port" {
-  description = "Port for ClickHouse connection"
-  type        = string
-}
-
-variable "clickhouse_user" {
-  description = "Username for ClickHouse connection"
-  type        = string
-}
-
-variable "clickhouse_password" {
-  description = "Password for ClickHouse connection"
-  type        = string
-  sensitive   = true
-}
-
-variable "clickhouse_db" {
-  description = "Database name for ClickHouse connection"
-  type        = string
-}
-
-variable "object_id" {
-  description = "Object ID for log retention logic"
-  type        = string
-}
-
-variable "older_than_days" {
-  description = "Number of days to determine log retention cutoff"
-  type        = number
-}
-
-variable "target_records" {
-  description = "Target number of records for log retention logic"
-  type        = number
-}
-
-variable "iterations" {
-  description = "Number of iterations for log retention logic"
-  type        = number
 }
 
